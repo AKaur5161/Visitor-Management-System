@@ -1,0 +1,68 @@
+
+
+import com.infodart.dao.BaseDao;
+import com.infodart.dao.BaseDaoImpl;
+import com.infodart.entity.Login;
+import com.infodart.service.BaseService;
+import com.infodart.service.BaseServiceImpl;
+
+
+@WebServlet("/OTPController")
+public class OTPController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private final BaseService baseService = new BaseServiceImpl();
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public OTPController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		PrintWriter out = response.getWriter();
+
+		response.setContentType("text/html");
+		BaseDao base = new BaseDaoImpl();
+
+		HttpSession session = request.getSession(false);
+		String str = (String) session.getAttribute("name");
+		System.out.println("staffsecurity : " + str);
+     
+		int ID = baseService.getId();
+		System.out.println("id is" + ID);
+
+		Login loguserid = new Login();
+		loguserid.loginid(ID);
+
+		String Email = request.getParameter("email");
+		session.setAttribute("email", Email);
+		System.out.println("email  "+Email);
+		base.sendMailOTP(Email);
+	
+		
+		out.println("<script type=\"text/javascript\">");
+		out.println("alert('OTP SENT');");
+		out.println("location='verifyotp.jsp';");
+		out.println("</script>");
+	}
+
+}
