@@ -1,0 +1,20 @@
+package com.infodart.service;
+
+import com.infodart.entity.Login;
+import com.infodart.entity.Visitor;
+
+public interface BaseService {
+	
+	public boolean login(String username, String password);
+
+	public String getRole();
+
+	public Login register(Login staff);
+
+	public Visitor registerVisitor(Visitor visitor);
+	
+	public int getId();
+	
+	public boolean VisitorCheckout(int id);
+	public boolean ResetPassword(String currentpass, String newpass, String confirmpass);
+}
