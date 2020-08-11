@@ -1,0 +1,40 @@
+package com.infodart.dao;
+
+import com.infodart.entity.Login;
+import com.infodart.entity.Visitor;
+
+public interface BaseDao {
+	
+	public  boolean login(String username, String password);
+	
+	
+
+	public Login register(Login staff);
+	
+	public Visitor registerVisitor(Visitor visitor);
+	
+	public boolean ResetPassword(String currentpass, String newpass, String confirmpass);
+	
+	public String getRole();
+	
+	public String getName();
+	
+	public int getId();
+	
+	public Visitor getVisitorDetails();
+	
+	public int getlastId();
+	
+	public void sendMail();
+	
+	public void sendMailOTP(String email);
+	
+	public boolean VisitorCheckout(int id);
+	
+	public boolean verifyEmployee(String name, String Designation);
+
+	public boolean verifyotp(int otp);
+
+	
+	
+}
